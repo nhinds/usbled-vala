@@ -65,6 +65,10 @@ namespace USBLEDHandler {
 	}
 
 	private static void list_devices() throws Error {
+		if (!SYS_USBLED.query_exists()) {
+			return;
+		}
+		
 		var children = SYS_USBLED.enumerate_children(FileAttribute.STANDARD_NAME, FileQueryInfoFlags.NONE);
 		FileInfo? child;
 		while ((child = children.next_file()) != null) {
